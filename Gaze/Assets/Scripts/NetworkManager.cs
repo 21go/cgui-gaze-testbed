@@ -133,19 +133,25 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 
         Debug.Log("<<<<<<< RawEncoded >>>>>>>>" + runner.LocalPlayer.RawEncoded);
 
-        if(runner.LocalPlayer.RawEncoded==2)
-        {
-            // miniMap.GetComponent<RawImage>().texture = renderTextureRight; 
-            // handCanvas.SetActive(true);
-            Vector3 position = SetUpPosition.transform.position;
-            position.x -= 5f;
-            SetUpPosition.transform.position= position;
-        }
-        else
-        {
-            // miniMap.GetComponent<RawImage>().texture = renderTextureLeft;
-            // handCanvas.SetActive(false);
-        }
+        // if(runner.LocalPlayer.RawEncoded==2)
+        // {
+        //     // miniMap.GetComponent<RawImage>().texture = renderTextureRight; 
+        //     // handCanvas.SetActive(true);
+        //     // Vector3 position = SetUpPosition.transform.position;
+        //     // position.x -= 5f;
+        //     // SetUpPosition.transform.position= position;
+        // }
+        // else
+        // {
+        //     // miniMap.GetComponent<RawImage>().texture = renderTextureLeft;
+        //     // handCanvas.SetActive(false);
+        // }
+
+        // preset the initial position of the player
+        Vector3 position = SetUpPosition.transform.position;
+        position.x += 2.0f*runner.LocalPlayer.RawEncoded;
+        SetUpPosition.transform.position = position;
+
     }
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)

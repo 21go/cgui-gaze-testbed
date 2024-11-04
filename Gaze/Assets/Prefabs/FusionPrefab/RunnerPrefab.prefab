@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7358200056393168603}
-  - component: {fileID: 5909478978934738603}
+  - component: {fileID: 8311105404622044601}
   m_Layer: 0
   m_Name: Recorder
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9057512494260937154}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5909478978934738603
+--- !u!114 &8311105404622044601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,8 +85,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9057512494260937154}
   - component: {fileID: 2795460943221252607}
-  - component: {fileID: 5766999109240983312}
-  - component: {fileID: 1933575792137109016}
+  - component: {fileID: 1249442118925472838}
+  - component: {fileID: 716507569482777101}
   m_Layer: 0
   m_Name: RunnerPrefab
   m_TagString: Untagged
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: -1199893898, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5766999109240983312
+--- !u!114 &1249442118925472838
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,12 +131,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4214716712270837418}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05d1a81d8b12be5419b202c9609912b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 38d403fc3c9dd25468d71b6d04f5860a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab:
-    RawGuidValue: 0c8ad6b5a311ebf429f8e0ffd24a02e8
---- !u!114 &1933575792137109016
+    RawGuidValue: c1c0a03adf926a84eba13e7585a45eef
+--- !u!114 &716507569482777101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,8 +153,8 @@ MonoBehaviour:
   ApplyDontDestroyOnLoad: 1
   runInBackground: 1
   statsResetInterval: 1000
-  speakerPrefab: {fileID: 2306753581832128987, guid: 47a38637000e34544880729cf18b4b4c, type: 3}
-  primaryRecorder: {fileID: 5909478978934738603}
+  speakerPrefab: {fileID: 2306753581832128987, guid: f8627ad3a0bba1a4aa002cc2014166f3, type: 3}
+  primaryRecorder: {fileID: 8311105404622044601}
   usePrimaryRecorder: 1
   cppCompatibilityMode: 0
   Settings:
