@@ -3,20 +3,23 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Cube
+  - FreeRotating
+  - Pickable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - HiddenMesh
   - Water
   - UI
   - 
   - 
   - 
   - 
-  - 
-  - 
+  - Character
+  - MirroredCharacter
   - 
   - 
   - 
