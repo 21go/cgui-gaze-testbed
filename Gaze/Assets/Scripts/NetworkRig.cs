@@ -19,6 +19,9 @@ public class NetworkRig : NetworkBehaviour
 
     [SerializeField]
     private NetworkTransform rightHandTransform;
+    
+    [SerializeField]
+    private NetworkTransform fixationTransform;
 
     HardwareRig hardwareRig;
 
@@ -48,6 +51,9 @@ public class NetworkRig : NetworkBehaviour
             leftHandTransform.transform.SetPositionAndRotation(input.LeftHandPosition, input.LeftHandRotation);
 
             rightHandTransform.transform.SetPositionAndRotation(input.RightHandPosition, input.RightHandRotation);
+            
+            fixationTransform.transform.SetPositionAndRotation(input.FixationPosition, input.FixationRotation);
+            
 
         }
     }
@@ -64,7 +70,8 @@ public class NetworkRig : NetworkBehaviour
             leftHandTransform.transform.SetPositionAndRotation(hardwareRig.leftHandTransform.position, hardwareRig.leftHandTransform.rotation);
 
             rightHandTransform.transform.SetPositionAndRotation(hardwareRig.rightHandTransform.position, hardwareRig.rightHandTransform.rotation);
-
+            
+            fixationTransform.transform.SetPositionAndRotation(hardwareRig.fixationPointTransform.position, hardwareRig.fixationPointTransform.rotation);
         }
     }
 }

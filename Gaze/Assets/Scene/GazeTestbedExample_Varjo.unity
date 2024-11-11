@@ -55620,6 +55620,7 @@ MonoBehaviour:
   headTransform: {fileID: 7270641908703594706}
   leftHandTransform: {fileID: 965306591}
   rightHandTransform: {fileID: 2100478528}
+  fixationPointTransform: {fileID: 1704815986}
 --- !u!1001 &150447175142336027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55647,6 +55648,10 @@ PrefabInstance:
     - target: {fileID: 7290687597331189940, guid: c7843d50499ce5d469cb4b59ff11e193, type: 3}
       propertyPath: m_Name
       value: GazeTarget
+      objectReference: {fileID: 0}
+    - target: {fileID: 7290687597331189940, guid: c7843d50499ce5d469cb4b59ff11e193, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7290687597331189943, guid: c7843d50499ce5d469cb4b59ff11e193, type: 3}
       propertyPath: m_RootOrder
@@ -56027,6 +56032,10 @@ PrefabInstance:
     - target: {fileID: 1015311468456129628, guid: e7e358565e530214c97adba8c82fedc6, type: 3}
       propertyPath: m_Name
       value: GhostHands
+      objectReference: {fileID: 0}
+    - target: {fileID: 1015311468456129628, guid: e7e358565e530214c97adba8c82fedc6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1038226463728940174, guid: e7e358565e530214c97adba8c82fedc6, type: 3}
       propertyPath: m_LocalScale.x
@@ -61219,7 +61228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &4258685905806051426
 GameObject:
   m_ObjectHideFlags: 0
@@ -61255,7 +61264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &5868765547438908758
 MonoBehaviour:
   m_ObjectHideFlags: 0

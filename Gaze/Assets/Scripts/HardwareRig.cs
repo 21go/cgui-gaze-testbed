@@ -15,6 +15,8 @@ public class HardwareRig : MonoBehaviour, INetworkRunnerCallbacks
 
     public Transform rightHandTransform;
 
+    public Transform fixationPointTransform;
+
     void Start()
     {
         // NetworkManager.Instance.Runner.AddCallbacks(this);
@@ -37,6 +39,9 @@ public class HardwareRig : MonoBehaviour, INetworkRunnerCallbacks
 
         xrRigState.RightHandPosition = rightHandTransform.position;
         xrRigState.RightHandRotation = rightHandTransform.rotation;
+        
+        xrRigState.FixationPosition = fixationPointTransform.position;
+        xrRigState.FixationRotation = fixationPointTransform.rotation;
 
         input.Set(xrRigState);
     }
@@ -150,4 +155,9 @@ public struct RigState : INetworkInput
 
     public Vector3 RightHandPosition;
     public Quaternion RightHandRotation;
+    
+    
+    // add the gaze point position
+    public Vector3 FixationPosition;
+    public Quaternion FixationRotation;
 }
