@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scene/GazeTestbedExample_Quest3.unity
-    guid: afca2be278ba63d489b7cc45bbd7acbb
-  - enabled: 1
     path: Assets/Scene/GazeTestbedExample_Varjo.unity
     guid: 9f575e497d810ee4897358fb5138da63
+  - enabled: 1
+    path: Assets/Scene/GazeTestbedExample_Quest3.unity
+    guid: afca2be278ba63d489b7cc45bbd7acbb
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: dd7b11a5a9386084eb002c8b187daf8a, type: 2}
     Varjo.XR.Settings: {fileID: 11400000, guid: 32320401598c529448f7125476e74c34, type: 2}
