@@ -7,6 +7,7 @@ TagManager:
   - Cube
   - FreeRotating
   - Pickable
+  - TextUI
   layers:
   - Default
   - TransparentFX

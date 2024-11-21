@@ -95,7 +95,10 @@ public class EyeTrackingExample : MonoBehaviour
 
     int gazeDataCount = 0;
     float gazeTimer = 0f;
-
+    
+    // user defined variables
+    RaycastHit[] hits;
+    
     void GetDevice()
     {
         InputDevices.GetDevicesAtXRNode(XRNode.CenterEye, devices);
@@ -257,41 +260,50 @@ public class EyeTrackingExample : MonoBehaviour
             }
         }
 
-        // Raycast to world from VR Camera position towards fixation point
-        if (Physics.SphereCast(rayOrigin, gazeRadius, direction, out hit))
-        {
-            // Put target on gaze raycast position with offset towards user
-            gazeTarget.transform.position = hit.point - direction * targetOffset;
-
-            // Make gaze target point towards user
-            gazeTarget.transform.LookAt(rayOrigin, Vector3.up);
-
-            // Scale gazetarget with distance so it apperas to be always same size
-            distance = hit.distance;
-            gazeTarget.transform.localScale = Vector3.one * distance;
-
-            // Prefer layers or tags to identify looked objects in your application
-            // This is done here using GetComponent for the sake of clarity as an example
-            RotateWithGaze rotateWithGaze = hit.collider.gameObject.GetComponent<RotateWithGaze>();
-            if (rotateWithGaze != null)
-            {
-                rotateWithGaze.RayHit();
-            }
-
-            // Alternative way to check if you hit object with tag
-            if (hit.transform.CompareTag("FreeRotating"))
-            {
-                AddForceAtHitPosition();
-            }
-        }
-        else
-        {
-            // If gaze ray didn't hit anything, the gaze target is shown at fixed distance
-            gazeTarget.transform.position = rayOrigin + direction * floatingGazeTargetDistance;
-            gazeTarget.transform.LookAt(rayOrigin, Vector3.up);
-            gazeTarget.transform.localScale = Vector3.one * floatingGazeTargetDistance;
-        }
-
+        // // Raycast to world from VR Camera position towards fixation point
+        // if (Physics.SphereCast(rayOrigin, gazeRadius, direction, out hit))
+        // {
+        //     // Put target on gaze raycast position with offset towards user
+        //     gazeTarget.transform.position = hit.point - direction * targetOffset;
+        //
+        //     // Make gaze target point towards user
+        //     gazeTarget.transform.LookAt(rayOrigin, Vector3.up);
+        //
+        //     // Scale gazetarget with distance so it apperas to be always same size
+        //     distance = hit.distance;
+        //     gazeTarget.transform.localScale = Vector3.one * distance;
+        //
+        //     // Prefer layers or tags to identify looked objects in your application
+        //     // This is done here using GetComponent for the sake of clarity as an example
+        //     RotateWithGaze rotateWithGaze = hit.collider.gameObject.GetComponent<RotateWithGaze>();
+        //     if (rotateWithGaze != null)
+        //     {
+        //         rotateWithGaze.RayHit();
+        //     }
+        //
+        //     // Alternative way to check if you hit object with tag
+        //     if (hit.transform.CompareTag("FreeRotating"))
+        //     {
+        //         AddForceAtHitPosition();
+        //     }
+        // }
+        // else
+        // {
+        //     // If gaze ray didn't hit anything, the gaze target is shown at fixed distance
+        //     gazeTarget.transform.position = rayOrigin + direction * floatingGazeTargetDistance;
+        //     gazeTarget.transform.LookAt(rayOrigin, Vector3.up);
+        //     gazeTarget.transform.localScale = Vector3.one * floatingGazeTargetDistance;
+        // }
+        
+        // rey cast to all the layers except the hands layer
+        int layerToIgnore = LayerMask.NameToLayer("TrackedHands");
+        int layerMask = ~(1 << layerToIgnore) | (1 << 10);
+        
+        hits = Physics.RaycastAll(rayOrigin, direction, 100.0F, layerMask);
+        
+        
+        
+        // script for data logging:
         if (Input.GetKeyDown(loggingToggleKey))
         {
             if (!logging)

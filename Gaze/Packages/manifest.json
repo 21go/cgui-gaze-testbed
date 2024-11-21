@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.github-glitchenzo.nugetforunity": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
     "com.meta.movement": "https://github.com/oculus-samples/Unity-Movement.git",
     "com.meta.xr.sdk.all": "69.0.1",
     "com.ultraleap.tracking": "6.12.1",
