@@ -104,6 +104,7 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
     float gazeTimer = 0f;
     
     // user defined variables
+    public RaycastHit textPanelHit; 
     RaycastHit[] hits;
     
     private bool gazeHitOnTextUI = false;
@@ -362,6 +363,7 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
                 // check the tag of hit objects:
                 if (hit.collider.gameObject.tag == UIParams.TextTag)
                 {
+                    textPanelHit = hit;
                     float width = hit.collider.gameObject.GetComponent<RectTransform>().rect.width;
                     float height = hit.collider.gameObject.GetComponent<RectTransform>().rect.height;
                     
@@ -380,6 +382,7 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
                 else
                 {
                     // stub for future use
+                    currentTextUI = null;
                 }
             }
             
@@ -389,14 +392,18 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
             gazeTarget.transform.position = rayOrigin + direction * floatingGazeTargetDistance;
             gazeTarget.transform.LookAt(rayOrigin, Vector3.up);
             gazeTarget.transform.localScale = Vector3.one * floatingGazeTargetDistance;
+            
+            currentTextUI = null;
 
             // gazeDot.Stop();
             
         }
         
         // data streaming with ZMQ:
-        
-        
+        if (currentTextUI != null)
+        {
+            CheckSendData(xrCamera.transform.position, xrCamera.transform.rotation, UIHitLocal, currentTextUI);
+        }
         
         // script for data logging:
         if (Input.GetKeyDown(loggingToggleKey))
