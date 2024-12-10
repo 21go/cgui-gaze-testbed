@@ -53,8 +53,11 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
     [Header("XR camera")]
     public Camera xrCamera;
 
-    [Header("Gaze point indicator")]
+    [Header("Gaze point indicator")] 
     public GameObject gazeTarget;
+    public Vector3 textPanelHitPoint = Vector3.zero; // Position of the hit
+    public string textPanelName = "None"; // Name of the hit object
+    public GameObject gazeCursor; 
 
     [Header("Gaze ray radius")]
     public float gazeRadius = 0.01f;
@@ -103,8 +106,8 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
     int gazeDataCount = 0;
     float gazeTimer = 0f;
     
-    // user defined variables
-    public RaycastHit textPanelHit; 
+    // user defined variabe
+    private RaycastHit textPanelHit; 
     RaycastHit[] hits;
     
     private bool gazeHitOnTextUI = false;
@@ -191,6 +194,7 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
         if (Input.GetKeyDown(calibrationRequestKey))
         {
             VarjoEyeTracking.RequestGazeCalibration(gazeCalibrationMode);
+            Debug.Log("Gaze calibration requested");
         }
 
         // Set output filter type
@@ -299,8 +303,7 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
         }
         
         // rey cast to all the layers except the hands layer
-        int layerToIgnore = LayerMask.NameToLayer("TrackedHands");
-        int layerMask = ~(1 << layerToIgnore) | (1 << 10);
+        int layerMask = -1;
         
         hits = Physics.RaycastAll(rayOrigin, direction, Mathf.Infinity, layerMask);
         gazeHitOnTextUI = false;
@@ -309,6 +312,7 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
         // check for the hit:
         if (hits.Length > 0)
         {
+            Debug.Log("Gaze hitted targets");
             // play the gazeDot
             // gazeDot.Play();
             // gazeDot.transform.position = hits[0].point;
@@ -357,13 +361,18 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
                 // // Normalize X and Y coordinates to 0-1
                 // float normalizedX = Mathf.InverseLerp(min.x, max.x, hitPointLocal.x);
                 // float normalizedY = Mathf.InverseLerp(min.y, max.y, hitPointLocal.y);
-
-                
                 
                 // check the tag of hit objects:
                 if (hit.collider.gameObject.tag == UIParams.TextTag)
                 {
+                    // spawn the gaze cursor
                     textPanelHit = hit;
+                    textPanelHitPoint = hit.point;
+                    textPanelName = hit.collider.gameObject.name;
+                    gazeCursor.SetActive(true);
+                    gazeCursor.transform.position = textPanelHitPoint;
+                    // Debug.Log("Gazing at text field!");
+                    
                     float width = hit.collider.gameObject.GetComponent<RectTransform>().rect.width;
                     float height = hit.collider.gameObject.GetComponent<RectTransform>().rect.height;
                     
@@ -371,7 +380,7 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
                     hitPointLocal.y = hitPointLocal.y /height;
                     
                     // Result: normalizedX and normalizedY will range between -0.5 and 0.5
-                    Debug.Log($"Normalized Hit Point: ({hitPointLocal.x}, {hitPointLocal.y})"+ "Hit Object name: "+ hit.collider.gameObject.name);
+                    // Debug.Log($"Normalized Hit Point: ({hitPointLocal.x}, {hitPointLocal.y})"+ "Hit Object name: "+ hit.collider.gameObject.name);
                     
                     // get the local key hit point
                     keyHitPointLocal = hitPointLocal;
@@ -383,6 +392,9 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
                 {
                     // stub for future use
                     currentTextUI = null;
+                    textPanelHitPoint = Vector3.zero;
+                    textPanelName = "None";
+                    gazeCursor.SetActive(false);
                 }
             }
             
