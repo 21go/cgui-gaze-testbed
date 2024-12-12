@@ -12,6 +12,7 @@ using Vector3 = UnityEngine.Vector3;
 using AsyncIO;
 using NetMQ;
 using NetMQ.Sockets;
+using TMPro;
 
 // public enum GazeDataSource
 // {
@@ -379,6 +380,7 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
                     hitPointLocal.x = hitPointLocal.x /width;
                     hitPointLocal.y = hitPointLocal.y /height;
                     
+                    
                     // Result: normalizedX and normalizedY will range between -0.5 and 0.5
                     // Debug.Log($"Normalized Hit Point: ({hitPointLocal.x}, {hitPointLocal.y})"+ "Hit Object name: "+ hit.collider.gameObject.name);
                     
@@ -387,6 +389,12 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
                     currentTextUI = hit.collider.gameObject;
                     
                     UIHitLocal = new Vector2(hitPointLocal.x, hitPointLocal.y);
+                    
+                    // assign the hit point text input field
+                    // GazeUtils.inputField = hit.collider.gameObject.GetComponent<TMP_InputField>();
+                    GazeUtils.inputField = hit.collider.transform.GetChild(0).transform.GetComponent<TMP_InputField>();
+                    GazeUtils.cursorPosition = textPanelHitPoint;
+
                 }
                 else
                 {
@@ -394,13 +402,21 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
                     currentTextUI = null;
                     textPanelHitPoint = Vector3.zero;
                     textPanelName = "None";
-                    gazeCursor.SetActive(false);
+                    
+                    
                 }
             }
             
         }
         else
         {
+            gazeCursor.SetActive(false);
+            // reset the key hit point local and input field
+            // assign the hit point text input field
+            GazeUtils.inputField = null;
+            GazeUtils.cursorPosition = new Vector3(Mathf.NegativeInfinity, Mathf.NegativeInfinity, Mathf.NegativeInfinity);
+
+            
             gazeTarget.transform.position = rayOrigin + direction * floatingGazeTargetDistance;
             gazeTarget.transform.LookAt(rayOrigin, Vector3.up);
             gazeTarget.transform.localScale = Vector3.one * floatingGazeTargetDistance;

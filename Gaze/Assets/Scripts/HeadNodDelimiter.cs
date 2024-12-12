@@ -76,6 +76,12 @@ public class HeadNodYesSensor : GenericSingleton<HeadNodYesSensor>
 
                     Debug.Log( "Yuuuup!");
 
+                    if (GazeUtils.inputField != null)
+                    {
+                        GazeUtils.PlaceCaretAtCursor(GazeUtils.cursorPosition, Camera.main);
+                        Debug.Log("Placing caret at cursor");
+                    }
+
                     // if (AudioYes) AudioYes.Play(0);
                 }
             }
