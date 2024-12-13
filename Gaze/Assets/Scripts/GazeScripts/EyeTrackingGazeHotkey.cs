@@ -149,7 +149,10 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
         //Hiding the gazetarget if gaze is not available or if the gaze calibration is not done
         if (VarjoEyeTracking.IsGazeAllowed() && VarjoEyeTracking.IsGazeCalibrated())
         {
-            gazeTarget.SetActive(true);
+            // always set the gaze target to be inactive
+            
+            // gazeTarget.SetActive(true);
+            gazeTarget.SetActive(false);
         }
         else
         {
@@ -180,6 +183,11 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
 
     void Update()
     {
+        // if (GetKeyDown('P'))
+        // {
+        //     Debug.Log("P key pressed");
+        // }
+        
         if (logging && printFramerate)
         {
             gazeTimer += Time.deltaTime;
@@ -233,8 +241,9 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
             }
 
             // Show gaze target
-            gazeTarget.SetActive(true);
-
+            // gazeTarget.SetActive(true);
+            gazeTarget.SetActive(false);
+            
             if (gazeDataSource == GazeDataSource.InputSubsystem)
             {
                 // Get data for eye positions, rotations and the fixation point
@@ -430,7 +439,7 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
         // data streaming with ZMQ:
         if (currentTextUI != null)
         {
-            CheckSendData(xrCamera.transform.position, xrCamera.transform.rotation, UIHitLocal, currentTextUI);
+            CheckSendData(xrCamera.transform.position, xrCamera.transform.rotation, UIHitLocal, currentTextUI, isKeyHit:true);
         }
         
         // script for data logging:
@@ -459,7 +468,7 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
     }
     
     //check the data to be sent via ZMQ
-    private void CheckSendData(Vector3 playerPosition, Quaternion playerRotation, Vector2 UIHitLocal, GameObject currentTextUI)
+    private void CheckSendData(Vector3 playerPosition, Quaternion playerRotation, Vector2 UIHitLocal, GameObject currentTextUI, bool isKeyHit = false)
     {
         if (camGazeSocket == null)
         {
@@ -473,7 +482,8 @@ public class EyeTrackingGazeHotkey : MonoBehaviour
             .SendMoreFrame(playerRotation.ToString())
             .SendMoreFrame(UIHitLocal.ToString())
             .SendMoreFrame(keyHitPointLocal.ToString())
-            .SendFrame(currentTextUI.name);
+            .SendMoreFrame(currentTextUI.name)
+            .SendFrame(isKeyHit.ToString());
     }
 
     void AddForceAtHitPosition()

@@ -7,7 +7,7 @@ public class HeadNodYesSensor : GenericSingleton<HeadNodYesSensor>
     const float NodCountRequired = 2;
 
     // how much up/down constitutes half of a nod
-    const float NodAngularRequirement = 8;
+    const float NodAngularRequirement = 12;
 
     // each phase of "nod" only latches for this long
     const float NodTimingRequirement = 0.75f;
